@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     String data[]={"蘋果","檸檬","香蕉","橘子"};
+    String data2[]={"Apple","Lemon","Banana","Orange"};
     ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,32 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lv=(ListView)findViewById(R.id.listView);
-        MyAdapter adapter = new MyAdapter();
+        MyAdapter adapter = new MyAdapter(MainActivity.this,data,data2);
         lv.setAdapter(adapter);
     }
-    class MyAdapter extends BaseAdapter{
 
-        @Override
-        public int getCount() {
-            return data.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v = getLayoutInflater().inflate(R.layout.myitem,null);
-            TextView tv = (TextView)v.findViewById(R.id.textView);
-            tv.setText(data[position]);
-            return tv;
-        }
-    }
 }
