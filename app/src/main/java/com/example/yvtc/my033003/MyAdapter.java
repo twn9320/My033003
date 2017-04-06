@@ -6,9 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,7 @@ public class MyAdapter extends BaseAdapter {
             convertView=((Activity)context).getLayoutInflater().inflate(R.layout.myitem,null);
             holder.tv=(TextView)convertView.findViewById(R.id.textView);
             holder.chk=(CheckBox)convertView.findViewById(R.id.checkBox);
+            holder.btn=(Button)convertView.findViewById(R.id.button);
             convertView.setTag(holder);
         }
         else{
@@ -63,10 +66,17 @@ public class MyAdapter extends BaseAdapter {
             }
         });
         holder.tv.setText(data.get(position));
+        holder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,data.get(position),Toast.LENGTH_SHORT).show();
+            }
+        });
         return convertView;
     }
     static class ViewHolder{
         TextView tv;
         CheckBox chk;
+        Button btn;
     }
 }
