@@ -44,17 +44,29 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         Log.d("MyView","P:"+position);
-        View v = ((Activity)context).getLayoutInflater().inflate(R.layout.myitem,null);
-        TextView tv = (TextView)v.findViewById(R.id.textView);
-        CheckBox chk = (CheckBox)v.findViewById(R.id.checkBox);
-        chk.setChecked(chks[position]);
-        chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        ViewHolder holder = new ViewHolder();
+        if(convertView == null){
+            convertView=((Activity)context).getLayoutInflater().inflate(R.layout.myitem,null);
+            holder.tv=(TextView)convertView.findViewById(R.id.textView);
+            holder.chk=(CheckBox)convertView.findViewById(R.id.checkBox);
+            convertView.setTag(holder);
+        }
+        else{
+            holder = (ViewHolder)convertView.getTag();
+        }
+
+        holder.chk.setChecked(chks[position]);
+        holder.chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 chks[position] = isChecked;
             }
         });
-        tv.setText(data.get(position));
-        return v;
+        holder.tv.setText(data.get(position));
+        return convertView;
+    }
+    static class ViewHolder{
+        TextView tv;
+        CheckBox chk;
     }
 }
