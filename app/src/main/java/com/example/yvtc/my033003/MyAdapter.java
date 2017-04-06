@@ -57,7 +57,7 @@ public class MyAdapter extends BaseAdapter {
         else{
             holder = (ViewHolder)convertView.getTag();
         }
-
+        holder.chk.setOnCheckedChangeListener(null);//解決打勾消失問題(很難)
         holder.chk.setChecked(chks[position]);
         holder.chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
